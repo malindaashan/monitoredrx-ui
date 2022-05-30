@@ -20,7 +20,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Patient from '../patient/Patient'
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import MedicationIcon from '@material-ui/icons/Medication';
+import MedicationIcon from '@material-ui/icons/AssignmentInd';
 
 
 
