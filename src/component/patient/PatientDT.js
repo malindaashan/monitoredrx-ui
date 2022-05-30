@@ -51,11 +51,11 @@ export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [data, setData] = useState({});
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data: response } = await axios.get('http://localhost:8080/allPatients');
+        console.error(response)
         setData(response);
       } catch (error) {
         console.error(error)
@@ -91,7 +91,7 @@ export default function StickyHeadTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data
+            {data.length !=undefined ? data
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
@@ -108,7 +108,7 @@ export default function StickyHeadTable() {
                     })}
                   </TableRow>
                 );
-              })}
+              }): null}
           </TableBody>
         </Table>
       </TableContainer>
