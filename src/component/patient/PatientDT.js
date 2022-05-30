@@ -9,6 +9,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { useEffect, useState} from 'react';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
 
 const columns = [
   { id: 'id', label: 'ID', minWidth: 20 },
@@ -49,7 +50,7 @@ const columns = [
 
 export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [data, setData] = useState({});
   useEffect(() => {
     const fetchData = async () => {
@@ -122,5 +123,7 @@ export default function StickyHeadTable() {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+    
   );
+
 }
