@@ -19,10 +19,6 @@ import Patient from '../patient/Patient'
 import Dashboard from '../dashboard/dashboard'
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import MedicationIcon from '@material-ui/icons/AssignmentInd';
-import { useNavigate } from "react-router-dom";
-import { useEffect} from 'react';
-
-
 
 const drawerWidth = 240;
 
@@ -31,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   appBar: {
-   zIndex: theme.zIndex.drawer + 1,
+    zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -87,13 +83,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     backgroundColor: 'white',
     height: '100%',
-    
+
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   sectionDesktop: {
-      align: 'right',
+    align: 'right',
   }
 }));
 
@@ -102,10 +98,9 @@ export default function MiniDrawer(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [activePage, setActivePage] = React.useState(props.page);
-  
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const navigate = useNavigate();
   const isMenuOpen = Boolean(anchorEl);
 
   const handleProfileMenuOpen = (event) => {
@@ -129,7 +124,7 @@ export default function MiniDrawer(props) {
     setOpen(false);
   };
 
-  const handleMenuBarClick = (event,text) =>{
+  const handleMenuBarClick = (event, text) => {
 
     setActivePage(event.currentTarget.id)
     props.navigatePage(text)
@@ -184,32 +179,32 @@ export default function MiniDrawer(props) {
           {['Dashboard', 'Patients'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <DashboardIcon
-              onClick = {(e) => handleMenuBarClick(e,text)}
-              id={text}
-              /> 
-              : <MedicationIcon 
-              onClick = {(e) => handleMenuBarClick(e,text)}
-              id={text}
-              />} 
-              </ListItemIcon>
-              
-              <ListItemText primary={text} 
-              onClick = {(e) => handleMenuBarClick(e,text)}
-              id={text}
-              selected
+                onClick={(e) => handleMenuBarClick(e, text)}
+                id={text}
               />
-            
+                : <MedicationIcon
+                  onClick={(e) => handleMenuBarClick(e, text)}
+                  id={text}
+                />}
+              </ListItemIcon>
+
+              <ListItemText primary={text}
+                onClick={(e) => handleMenuBarClick(e, text)}
+                id={text}
+                selected
+              />
+
             </ListItem>
           ))}
         </List>
         <Divider />
       </Drawer>
       <main className={classes.content}>
-         <div className={classes.toolbar} />
-         {activePage=='Patients'?<Patient/>: <Dashboard/>}
+        <div className={classes.toolbar} />
+        {activePage == 'Patients' ? <Patient /> : <Dashboard />}
       </main>
       {/* {renderMenu} */}
     </div>
-    
+
   );
 }

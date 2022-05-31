@@ -11,7 +11,7 @@ import TrashIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Input from '@material-ui/core/Input';
 import Check from '@material-ui/icons/Check';
-import { useEffect} from 'react';
+import { useEffect } from 'react';
 
 const columns = [
   { id: 'id', label: 'ID', minWidth: 20 },
@@ -51,12 +51,12 @@ const columns = [
     id: 'action',
     label: 'Action',
     minWidth: 100,
-    align:'left'
+    align: 'left'
   },
 ];
 
 
-export default function PatientDT({data,fetchData,editingIndex,enableEdit,saveEdit,handleEdit,deletePatient}) {
+export default function PatientDT({ data, fetchData, editingIndex, enableEdit, saveEdit, handleEdit, deletePatient }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -91,42 +91,42 @@ export default function PatientDT({data,fetchData,editingIndex,enableEdit,saveEd
                   {column.label}
                 </TableCell>
               ))}
-              
+
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.length !==undefined ? data
+            {data.length !== undefined ? data
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row,i) => {
+              .map((row, i) => {
                 const editing = editingIndex === i;
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        column.id==='action'? 
-                        <TableCell  key={column.id} align={column.align}>
-                          {editing?  <Check onClick={() => saveEdit(i)}/> :  <EditIcon onClick={() => {enableEdit(i)}}/>}
-                           
-                            <TrashIcon onClick={() => handleRemove(row.id)}/>
-                        </TableCell>:
-                         editing ? 
-                         <TableCell  key={column.id} align={column.align}>
-                            <Input value={value}
-                            onChange = {(e) => handleEdit(e,column.id,i)}>
-                            </Input>
-                          </TableCell>
-                          :  
-                        <TableCell  key={column.id} align={column.align}>
-                          {value}
-                        </TableCell>
-    
+                        column.id === 'action' ?
+                          <TableCell key={column.id} align={column.align}>
+                            {editing ? <Check onClick={() => saveEdit(i)} /> : <EditIcon onClick={() => { enableEdit(i) }} />}
+
+                            <TrashIcon onClick={() => handleRemove(row.id)} />
+                          </TableCell> :
+                          editing ?
+                            <TableCell key={column.id} align={column.align}>
+                              <Input value={value}
+                                onChange={(e) => handleEdit(e, column.id, i)}>
+                              </Input>
+                            </TableCell>
+                            :
+                            <TableCell key={column.id} align={column.align}>
+                              {value}
+                            </TableCell>
+
                       );
                     })}
-              
+
                   </TableRow>
                 );
-              }): null}
+              }) : null}
           </TableBody>
         </Table>
       </TableContainer>
@@ -140,7 +140,7 @@ export default function PatientDT({data,fetchData,editingIndex,enableEdit,saveEd
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
-    
+
   );
 
 }
