@@ -1,7 +1,7 @@
 import * as React from 'react';
 import axios from 'axios';
 
-export const AddPatient = async (data) => {
+export const addPatient = async (data) => {
     try {
       const response = await axios.post('http://localhost:8080/addPatient',data);
      // console.log(response)
