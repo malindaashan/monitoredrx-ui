@@ -19,6 +19,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Patient from '../patient/Patient'
+import Dashboard from '../dashboard/dashboard'
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import MedicationIcon from '@material-ui/icons/AssignmentInd';
 
@@ -226,7 +227,7 @@ export default function MiniDrawer(props) {
       </Drawer>
       <main className={classes.content}>
          <div className={classes.toolbar} />
-         {activePage=='Patients'?<Patient/>: "Welcome To Monitored Rx Portal"}
+         {activePage=='Patients'?<Patient/>: <Dashboard/>}
       </main>
       {/* {renderMenu} */}
     </div>

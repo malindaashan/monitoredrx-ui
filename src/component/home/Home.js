@@ -4,7 +4,6 @@ import HomeDrawer from './HomeDrawer';
 
   return (
   <div>
-  {/* <HomeHeader/> */}
    <HomeDrawer
    page ={page}
    />

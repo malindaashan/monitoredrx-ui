@@ -7,14 +7,17 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import TrashIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import Grid from '@material-ui/core/Grid';
+//import TableRowColumn from '@material-ui/core/TableRowColumn';
 import { useEffect, useState} from 'react';
 import axios from 'axios';
-import Button from '@material-ui/core/Button';
 
 const columns = [
   { id: 'id', label: 'ID', minWidth: 20 },
-  { id: 'firstname', label: 'First Name', minWidth: 150 },
-  { id: 'lastname', label: 'Last Name', minWidth: 150 },
+  { id: 'firstname', label: 'First Name', minWidth: 120 },
+  { id: 'lastname', label: 'Last Name', minWidth: 120 },
   {
     id: 'address',
     label: 'Address',
@@ -23,12 +26,12 @@ const columns = [
   {
     id: 'city',
     label: 'City',
-    minWidth: 120,
+    minWidth: 100,
   },
   {
     id: 'state',
     label: 'State',
-    minWidth: 150,
+    minWidth: 100,
   },
   {
     id: 'zipcode',
@@ -45,26 +48,23 @@ const columns = [
     label: 'Email',
     minWidth: 170,
   },
+  {
+    id: 'action',
+    label: 'Action',
+    minWidth: 100,
+    align:'left'
+  },
 ];
 
 
-export default function StickyHeadTable() {
+export default function PatientDT() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [data, setData] = useState({});
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data: response } = await axios.get('http://localhost:8080/allPatients');
-        console.error(response)
-        setData(response);
-      } catch (error) {
-        console.error(error)
-      }
-    };
-
     fetchData();
   }, []);
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -72,6 +72,35 @@ export default function StickyHeadTable() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+  const handleRemove = (id) => {
+    deletePatient(id)
+  };
+  const handleEdit = () => {
+  };
+
+  const fetchData = async () => {
+    try {
+      const { data: response } = await axios.get('http://localhost:8080/allPatients');
+      console.error(response)
+      setData(response);
+    } catch (error) {
+      console.error(error)
+    }
+  };
+  const deletePatient = async (id) => {
+    try {
+      const response  = await axios.delete('http://localhost:8080/deletePatient/'+id);
+        console.log(response)
+      if(response.status == 200){
+          alert("Deleted patient "+id+" successfully")
+          fetchData()
+      } else{
+          alert("Something went wrong")
+      }
+    } catch (error) {
+      console.error(error)
+    }
   };
 
   return (
@@ -89,6 +118,7 @@ export default function StickyHeadTable() {
                   {column.label}
                 </TableCell>
               ))}
+              
             </TableRow>
           </TableHead>
           <TableBody>
@@ -100,13 +130,19 @@ export default function StickyHeadTable() {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
+                        column.id=='action'? 
+          
+                        <TableCell  key={column.id} align={column.align}>
+                            <EditIcon onClick={() => handleEdit}/>
+                            <TrashIcon onClick={() => handleRemove(row.id)}/>
+                        </TableCell>:
                         <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
+                          {value}
                         </TableCell>
+    
                       );
                     })}
+              
                   </TableRow>
                 );
               }): null}

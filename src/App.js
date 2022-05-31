@@ -15,6 +15,9 @@ function App() {
     <Route path="/dashboard" element={<Home
       page = {"dashboard"} />}>
     </Route>
+    <Route path="/patient" element={<Home
+      page = {"Patients"} />}>
+    </Route>
     </Routes>
   </Router>
   );

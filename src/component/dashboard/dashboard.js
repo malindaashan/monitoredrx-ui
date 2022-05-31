@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 
   return (
   <div>
-      Welcome to Dashboard
+      Welcome to MonitoredRx Dashboard
    
  </div>
   )
