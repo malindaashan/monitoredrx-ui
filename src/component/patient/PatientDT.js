@@ -57,10 +57,10 @@ const columns = [
 ];
 
 
-export default function PatientDT() {
+export default function PatientDT({data,setData,fetchData}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [data, setData] = useState({});
+ // const [data, setData] = useState({});
   useEffect(() => {
     fetchData();
   }, []);
@@ -79,15 +79,6 @@ export default function PatientDT() {
   const handleEdit = () => {
   };
 
-  const fetchData = async () => {
-    try {
-      const { data: response } = await axios.get('http://localhost:8080/allPatients');
-      console.log(response)
-      setData(response);
-    } catch (error) {
-      console.error(error)
-    }
-  };
   const deletePatient = async (id) => {
     try {
       const response  = await axios.delete('http://localhost:8080/deletePatient/'+id);

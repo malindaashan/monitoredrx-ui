@@ -5,8 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useEffect, useState} from 'react';
 import axios from 'axios';
-import {addPatient} from '../action/AddPatient'
-export default function PatientForm() {
+export default function PatientForm({addPatient}) {
     const initialValues = {
         firstname: "",
         lastname: "",
@@ -27,19 +26,11 @@ export default function PatientForm() {
     }
     const saveForm = (e) => {
         e.preventDefault();
-        const response = addPatient(values)
+        addPatient(values)
         e.target.reset();
     };
 
-    const fetchData = async () => {
-        try {
-          const { data: response } = await axios.get('http://localhost:8080/allPatients');
-          console.log(response)
-          setData(response);
-        } catch (error) {
-          console.error(error)
-        }
-    };
+
   return (
     <Container component="main" maxWidth="sm">
         <div><h3>Add New Patient</h3></div>
