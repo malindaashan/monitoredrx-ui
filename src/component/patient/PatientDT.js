@@ -82,7 +82,7 @@ export default function PatientDT() {
   const fetchData = async () => {
     try {
       const { data: response } = await axios.get('http://localhost:8080/allPatients');
-      console.error(response)
+      console.log(response)
       setData(response);
     } catch (error) {
       console.error(error)

@@ -5,10 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useEffect, useState} from 'react';
 import axios from 'axios';
+import {AddPatient} from '../action/AddPatient'
 export default function PatientForm() {
-    const saveForm = (e) => {
-        e.preventDefault();
-    }
     const initialValues = {
         firstname: "",
         lastname: "",
@@ -27,18 +25,15 @@ export default function PatientForm() {
         data[e.target.name] = e.target.value;
         setValues(data);
     }
-    const saveData = async () => {
-        try {
-          const { data: response } = await axios.post('http://localhost:8080/addPatient');
-          console.error(response)
-        } catch (error) {
-          console.error(error)
-        }
-      };
+    const saveForm = (e) => {
+        e.preventDefault();
+        const response = AddPatient(values)
+        e.target.reset();
+    };
   return (
     <Container component="main" maxWidth="sm">
         <div><h3>Add New Patient</h3></div>
-        <form className="action-form" onSubmit={() => saveForm}>
+        <form className="form-submit" onSubmit={saveForm}>
             <Grid container spacing={1}>
                 <Grid item xs={8} sm={6}>
                     <TextField
@@ -126,6 +121,7 @@ export default function PatientForm() {
                         label="ZipCode"
                         autoFocus
                         margin="dense"
+                        type="number"
                         onChange={handleInputChange}
                    
                     />
@@ -141,6 +137,7 @@ export default function PatientForm() {
                         label="Phone Number"
                         autoFocus
                         margin="dense"
+                        type="number"
                         onChange={handleInputChange}
                    
                     />
