@@ -9,13 +9,9 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TrashIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
-import Grid from '@material-ui/core/Grid';
 import Check from '@material-ui/icons/Check';
-import { useEffect, useState} from 'react';
-import axios from 'axios';
-import { TextFields } from '@material-ui/icons';
+import { useEffect} from 'react';
 
 const columns = [
   { id: 'id', label: 'ID', minWidth: 20 },
@@ -99,7 +95,7 @@ export default function PatientDT({data,fetchData,editingIndex,enableEdit,saveEd
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.length !=undefined ? data
+            {data.length !==undefined ? data
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row,i) => {
                 const editing = editingIndex === i;
@@ -108,9 +104,9 @@ export default function PatientDT({data,fetchData,editingIndex,enableEdit,saveEd
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        column.id=='action'? 
+                        column.id==='action'? 
                         <TableCell  key={column.id} align={column.align}>
-                          {editing?  <Check onClick={() => saveEdit(row,i)}/> :  <EditIcon onClick={() => {enableEdit(i)}}/>}
+                          {editing?  <Check onClick={() => saveEdit(i)}/> :  <EditIcon onClick={() => {enableEdit(i)}}/>}
                            
                             <TrashIcon onClick={() => handleRemove(row.id)}/>
                         </TableCell>:
