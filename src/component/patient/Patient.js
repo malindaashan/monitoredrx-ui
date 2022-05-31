@@ -16,7 +16,6 @@ import axios from 'axios';
   const fetchData = async () => {
     try {
       const { data: response } = await axios.get(BASE_URL+'/allPatients');
-      console.log(response)
       setData(response);
     } catch (error) {
       console.error(error)
@@ -26,7 +25,6 @@ import axios from 'axios';
 
     try {
       const response = await axios.post(BASE_URL+'/addPatient',data);
-     // console.log(response)
       if(response.status == 200){
         alert("Patient Added Successfully");
         fetchData();
@@ -55,6 +53,19 @@ import axios from 'axios';
       console.error(error);
     }
   };
+  const deletePatient = async (id) => {
+    try {
+      const response  = await axios.delete('http://localhost:8080/deletePatient/'+id);
+      if(response.status == 200){
+          alert("Deleted patient "+id+" successfully")
+          fetchData()
+      } else{
+          alert("Something went wrong")
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  };
 
    const handleEdit = (e,colname,i) => {
     console.log(e.target.value)  
@@ -81,6 +92,7 @@ import axios from 'axios';
           enableEdit={enableEdit}
           saveEdit={saveEdit}
           handleEdit={handleEdit}
+          deletePatient={deletePatient}
           
         />
    <br/>

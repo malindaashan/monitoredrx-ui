@@ -60,7 +60,7 @@ const columns = [
 ];
 
 
-export default function PatientDT({data,fetchData,editingIndex,enableEdit,saveEdit,handleEdit}) {
+export default function PatientDT({data,fetchData,editingIndex,enableEdit,saveEdit,handleEdit,deletePatient}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -78,22 +78,6 @@ export default function PatientDT({data,fetchData,editingIndex,enableEdit,saveEd
   };
   const handleRemove = (id) => {
     deletePatient(id)
-  };
-
-
-  const deletePatient = async (id) => {
-    try {
-      const response  = await axios.delete('http://localhost:8080/deletePatient/'+id);
-        console.log(response)
-      if(response.status == 200){
-          alert("Deleted patient "+id+" successfully")
-          fetchData()
-      } else{
-          alert("Something went wrong")
-      }
-    } catch (error) {
-      console.error(error)
-    }
   };
 
   return (
