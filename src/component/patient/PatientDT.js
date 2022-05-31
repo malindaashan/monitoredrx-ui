@@ -13,7 +13,6 @@ import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
 import Grid from '@material-ui/core/Grid';
 import Check from '@material-ui/icons/Check';
-//import TableRowColumn from '@material-ui/core/TableRowColumn';
 import { useEffect, useState} from 'react';
 import axios from 'axios';
 import { TextFields } from '@material-ui/icons';
@@ -64,8 +63,7 @@ const columns = [
 export default function PatientDT({data,fetchData,editingIndex,enableEdit,saveEdit,handleEdit}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  //const [editedrow, setEditedrow] = React.useState({});
- // const [data, setData] = useState({});
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -81,10 +79,6 @@ export default function PatientDT({data,fetchData,editingIndex,enableEdit,saveEd
   const handleRemove = (id) => {
     deletePatient(id)
   };
-
-  //const handleEdit = (e,colname) => {
-    //setEditedrow(editedrow.colname = e.target)
-  //};
 
 
   const deletePatient = async (id) => {

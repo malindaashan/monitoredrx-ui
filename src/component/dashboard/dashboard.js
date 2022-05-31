@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
- const  Dashboard = ({page})=>{
+import React from "react";
+const  Dashboard = ()=>{
 
   return (
   <div>

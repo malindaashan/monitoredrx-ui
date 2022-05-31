@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -15,9 +15,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import Patient from '../patient/Patient'
 import Dashboard from '../dashboard/dashboard'
 import DashboardIcon from '@material-ui/icons/Dashboard';
@@ -94,11 +91,6 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   sectionDesktop: {
-     // display:'block',
-      //position:'fixed'
-     //marginLeft: theme.spacing(160),
-   // marginLeft: '400%'
-      //alignItems: 'left',
       align: 'right',
   }
 }));
@@ -109,7 +101,6 @@ export default function MiniDrawer(props) {
   const [open, setOpen] = React.useState(false);
   const [activePage, setActivePage] = React.useState(props.page);
   
- // const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -136,13 +127,7 @@ export default function MiniDrawer(props) {
   };
 
   function handleMenuBarClick(event){
-    console.log("dddffeeeeeer");
-    //setMenuAnchorEl(event.currentTarget);
-    console.log(event.currentTarget.id);
     setActivePage(event.currentTarget.id)
-  
-    //console.log("sssss")  
-    //alert("hi");
   }
 
   return (
@@ -169,18 +154,6 @@ export default function MiniDrawer(props) {
           <Typography variant="h6" noWrap>
             MonitoredRx Portal
           </Typography>
-          {/* <div className={classes.sectionDesktop}>
-                <IconButton
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-                >
-                <AccountCircle />
-                </IconButton>
-          </div> */}
         </Toolbar>
       </AppBar>
       <Drawer
