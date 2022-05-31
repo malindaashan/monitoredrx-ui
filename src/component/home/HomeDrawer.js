@@ -19,6 +19,8 @@ import Patient from '../patient/Patient'
 import Dashboard from '../dashboard/dashboard'
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import MedicationIcon from '@material-ui/icons/AssignmentInd';
+import { useNavigate } from "react-router-dom";
+import { useEffect} from 'react';
 
 
 
@@ -103,8 +105,9 @@ export default function MiniDrawer(props) {
   
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  const navigate = useNavigate();
   const isMenuOpen = Boolean(anchorEl);
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -126,8 +129,10 @@ export default function MiniDrawer(props) {
     setOpen(false);
   };
 
-  function handleMenuBarClick(event){
+  const handleMenuBarClick = (event,text) =>{
+
     setActivePage(event.currentTarget.id)
+    props.navigatePage(text)
   }
 
   return (
@@ -179,16 +184,17 @@ export default function MiniDrawer(props) {
           {['Dashboard', 'Patients'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <DashboardIcon
-              onClick= {handleMenuBarClick}
+              onClick = {(e) => handleMenuBarClick(e,text)}
               id={text}
               /> 
               : <MedicationIcon 
-              onClick= {handleMenuBarClick}
+              onClick = {(e) => handleMenuBarClick(e,text)}
               id={text}
               />} 
               </ListItemIcon>
+              
               <ListItemText primary={text} 
-              onClick= {handleMenuBarClick}
+              onClick = {(e) => handleMenuBarClick(e,text)}
               id={text}
               selected
               />

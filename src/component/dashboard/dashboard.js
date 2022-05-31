@@ -1,11 +1,9 @@
 import React from "react";
-const  Dashboard = ()=>{
-
+const Dashboard = () => {
   return (
-  <div>
+    <div>
       Welcome to MonitoredRx Dashboard
-   
- </div>
+    </div>
   )
 }
 
