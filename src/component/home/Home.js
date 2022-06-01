@@ -6,7 +6,6 @@ const MainHome = ({ page }) => {
   const navigate = useNavigate();
 
   const navigatePage = (text) => {
-    console.log(text)
     if (text === "Patients") {
       navigate("/patient");
     } else {
