@@ -1,9 +1,8 @@
 import React from "react";
 import PatientDT from '../patient/PatientDT'
 import PatientForm from '../patient/PatientForm'
-import { BASE_URL } from '../action/Settings'
+import {getAllPatientAction, addPatientAction, updatePatientAction, deletePatientAction} from '../../action/PatientAction'
 import { useState } from 'react';
-import axios from 'axios';
 
 
 const Patient = () => {
@@ -11,48 +10,32 @@ const Patient = () => {
   const [editingIndex, setEditingIndex] = useState(-1);
 
   const fetchData = async () => {
-    try {
-      const { data: response } = await axios.get(BASE_URL + '/allPatients');
-      setData(response);
-    } catch (error) {
-      console.error(error)
-    }
+    let response = await getAllPatientAction();
+    setData(response);
   };
-  const addPatient = async (data) => {
 
-    try {
-      const response = await axios.post(BASE_URL + '/addPatient', data);
-      if (response.status === 200) {
-        alert("Patient Added Successfully");
-        fetchData();
-      } else {
-        alert("Something Went wrong");
-      }
-    } catch (error) {
+  const addPatient = async (data) => {
+    let response = await addPatientAction(data);
+    if (response.status === 200) {
+      alert("Patient Added Successfully");
+      fetchData();
+    } else {
       alert("Something Went wrong");
-      console.error(error);
     }
   };
 
   const updatePatient = async (updatedRow) => {
-
-    try {
-      const response = await axios.put(BASE_URL + '/updatePatient', updatedRow);
-
-      if (response.status === 200) {
-        alert("Patient Updated Successfully");
-        fetchData();
-      } else {
-        alert("Something Went wrong");
-      }
-    } catch (error) {
+    let response = await updatePatientAction(updatedRow);
+    if (response.status === 200) {
+      alert("Patient Updated Successfully");
+      fetchData();
+    } else {
       alert("Something Went wrong");
-      console.error(error);
     }
   };
-  const deletePatient = async (id) => {
-    try {
-      const response = await axios.delete('http://localhost:8080/deletePatient/' + id);
+
+  const deletePatient= async (id) => {
+    let response = await deletePatientAction(id);
 
       if (response.status === 200) {
         alert("Deleted patient " + id + " successfully")
@@ -60,13 +43,10 @@ const Patient = () => {
       } else {
         alert("Something went wrong")
       }
-    } catch (error) {
-      console.error(error)
-    }
   };
 
-  const handleEdit = (e, colname, i) => {
-    setData(data.map((row, j) => (j === i ? { ...row, [colname]: e.target.value } : row)))
+  const handleEdit = (e, colname, editIndex) => {
+    setData(data.map((row, rowindex) => (rowindex === editIndex ? { ...row, [colname]: e.target.value } : row)))
   };
 
   const enableEdit = (i) => {

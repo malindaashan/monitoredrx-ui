@@ -20,7 +20,7 @@ import Dashboard from '../dashboard/dashboard'
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import MedicationIcon from '@material-ui/icons/AssignmentInd';
 
-const drawerWidth = 240;
+const drawerWidth = 220;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,9 +40,6 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-  },
-  menuButton: {
-    marginRight: 36,
   },
   hide: {
     display: 'none',
@@ -103,18 +100,6 @@ export default function MiniDrawer(props) {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -201,9 +186,8 @@ export default function MiniDrawer(props) {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {activePage == 'Patients' ? <Patient /> : <Dashboard />}
+        {activePage === 'Patients' ? <Patient /> : <Dashboard />}
       </main>
-      {/* {renderMenu} */}
     </div>
 
   );
