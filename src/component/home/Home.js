@@ -8,6 +8,8 @@ const MainHome = ({ page }) => {
   const navigatePage = (text) => {
     if (text === "Patients") {
       navigate("/patient");
+    }  else if (text === "Admin") {
+      navigate("/admin");
     } else {
       navigate("/dashboard");
     }

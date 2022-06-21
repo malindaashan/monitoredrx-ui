@@ -18,6 +18,9 @@ function App() {
         <Route exact path="/patient" element={<Home
           page={"Patients"} />}>
         </Route>
+        <Route exact path="/admin" element={<Home
+          page={"Admin"} />}>
+        </Route>
         <Route path='/*' element={<Navigate to='/dashboard' replace />} />
       </Routes>
     </Router>

@@ -17,8 +17,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Patient from '../patient/Patient'
 import Dashboard from '../dashboard/dashboard'
+import Admin from '../admin/Admin'
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import MedicationIcon from '@material-ui/icons/AssignmentInd';
+import SupervisorAccount from '@material-ui/icons/SupervisorAccount';
 
 const drawerWidth = 220;
 
@@ -29,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
     }),
   },
   appBarShift: {
@@ -161,16 +163,20 @@ export default function MiniDrawer(props) {
         </div>
         <Divider />
         <List>
-          {['Dashboard', 'Patients'].map((text, index) => (
+          {['Dashboard', 'Patients','Admin'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <DashboardIcon
+              <ListItemIcon>{index  === 0 ? <DashboardIcon
                 onClick={(e) => handleMenuBarClick(e, text)}
                 id={text}
               />
-                : <MedicationIcon
+                : index ===1 ?<MedicationIcon
                   onClick={(e) => handleMenuBarClick(e, text)}
                   id={text}
-                />}
+                /> : <SupervisorAccount
+                  onClick={(e) => handleMenuBarClick(e, text)}
+                  id={text}
+                />
+              }
               </ListItemIcon>
 
               <ListItemText primary={text}
@@ -186,7 +192,7 @@ export default function MiniDrawer(props) {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {activePage === 'Patients' ? <Patient /> : <Dashboard />}
+        {activePage === 'Patients' ? <Patient /> : activePage === 'Admin' ? <Admin/> :<Dashboard />}
       </main>
     </div>
 
