@@ -39,3 +39,13 @@ export const deletePatientAction  = async (id) => {
         console.error(error);
       }
 }
+
+export const patientFromProjectIdAction  = async (id) => {
+  try {
+    const { data: response } = await axios.get(BASE_URL + '/getPatientByProject/'+id);
+      return response;
+    } catch (error) {
+      alert("Something Went wrong");
+      console.error(error);
+    }
+}

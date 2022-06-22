@@ -10,13 +10,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Button from '@material-ui/core/Button';
 import { useEffect } from 'react';
 
-export default function UserList({fetchUserData}) {
+export default function UserList({userdata,handleUserClick}) {
   const [selectedIndex, setSelectedIndex] = React.useState(1);
-  const [checked, setChecked] = React.useState([0]);
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
@@ -25,67 +20,15 @@ export default function UserList({fetchUserData}) {
   return (
     <Box sx={{ width: '100%'}}>
       <List>
-        <Button fullWidth><ListItemText primary="User1" /></Button>
-        <Divider />
-            
-        <ListItemIcon/>
-        <ListItemText primary="User2" />
-        <Divider />
+        {userdata !== undefined ? userdata.map((user) => (
+                <Button id = {user.id} onClick={() => { handleUserClick(user.id) }}  fullWidth>
+                <ListItemText
+                primary={user.userId}
+                >
+                </ListItemText>
+                </Button>
+        )): null}
 
-        <ListItemIcon/>
-        <ListItemText primary="User3" />
-        <Divider />
-
-        <ListItemIcon/>
-        <ListItemText primary="User4" />
-        <Divider />
-
-        <ListItemIcon/>
-        <ListItemText primary="User5" />
-        <Divider />
-
-        <ListItemIcon/>
-        <ListItemText primary="User6" />
-        <Divider />
-
-        <ListItemIcon/>
-        <ListItemText primary="User7" />
-        <Divider />
-
-        <ListItemIcon/>
-        <ListItemText primary="User8" />
-        <Divider />
-
-        <ListItemIcon/>
-        <ListItemText primary="User9" />
-        <Divider />
-
-        <ListItemIcon/>
-        <ListItemText primary="User10" />
-        <Divider />
-
-        <ListItemIcon/>
-        <ListItemText primary="User11" />
-        <Divider />
-
-        <ListItemIcon/>
-        <ListItemText primary="User12" />
-        <Divider />
-
-        <ListItemIcon/>
-        <ListItemText primary="User13" />
-        <Divider />
-
-        <ListItemIcon/>
-        <ListItemText primary="User14" />
-        <Divider />
-
-        <ListItemIcon/>
-        <ListItemText primary="User15" />
-        <Divider />
-        <ListItemIcon/>
-        <ListItemText primary="User15" />
-        <Divider />
       </List>
     </Box>
   );
